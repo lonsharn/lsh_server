@@ -1,0 +1,6 @@
+#!/bin/bash
+
+aclocal
+libtoolize --automake --copy --debug --force
+autoconf
+automake -a

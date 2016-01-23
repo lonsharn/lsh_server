@@ -1,0 +1,3 @@
+libhallosql_pg_la-kc_string.lo: kc_string.cpp kc_string.h
+
+kc_string.h:

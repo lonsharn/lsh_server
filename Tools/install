@@ -1,0 +1,96 @@
+#!/bin/bash
+
+#INSTALLDIR=`realpath $0`
+INSTALLDIR=`dirname $0`
+echo $INSTALLDIR
+#install openssl
+tar -xvf openssl-1.0.2d.tar.gz 
+cd $INSTALLDIR/openssl-1.0.2d/
+./config shared --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install apr-1
+tar -xvf apr-1.5.2.tar.gz 
+cd $INSTALLDIR/apr-1.5.2/
+./configure --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install activemq-cpp
+tar -xvf activemq-cpp-library-3.8.3-src.tar.gz 
+cd $INSTALLDIR/activemq-cpp-library-3.8.3/
+./configure --prefix=$INSTALLDIR --with-apr=$INSTALLDIR --with-openssl=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install tinyxml
+tar -xvf tinyxml-2.5.3.tar.gz  
+cd $INSTALLDIR/tinyxml-2.5.3/
+./configure --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install libevent
+tar -xvf  libevent-2.0.22-stable.tar.gz
+cd $INSTALLDIR/libevent-2.0.22-stable/
+./configure --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install hiredis
+tar -xvf hiredis-master.tar.gz
+cd $INSTALLDIR/hiredis-master
+./configure --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install sqlite
+tar -xvf sqlite-autoconf-3081101.tar.gz 
+cd $INSTALLDIR/sqlite-autoconf-3081101
+./configure --prefix=$INSTALLDIR
+make -j4
+make install
+cd $INSTALLDIR
+
+#install jsoncpp
+tar -xvf jsoncpp-master.tar.gz
+cd $INSTALLDIR/jsoncpp-master
+cmake -DCMAKE_INSTALL_PREFIX=`pwd`/.. -DBUILD_SHARED_LIBS=ON CMakeLists.txt
+make -j4
+make install
+cd $INSTALLDIR
+
+#install mysql
+sudo yum install mysql-devel
+sudo ln -s /usr/lib64/mysql/libmysqlclient.so.18.0.0 /usr/lib/libmysqlclient.so
+
+#install pgsql
+tar -xvf postgresql-9.4.4.tar.gz 
+cd $INSTALLDIR/postgresql-9.4.4
+./configure --prefix=`pwd`/.. --without-readline
+make -j4
+make install
+cd $INSTALLDIR
+
+#install log4cpp
+tar -xvf log4cpp-1.1.2rc1.tar.gz
+cd $INSTALLDIR/log4cpp/
+./configure --prefix=`pwd`/..
+make -j4
+make install
+cd $INSTALLDIR
+
+#install libuuid
+tar -xvf libuuid-1.0.3.tar.gz
+cd $INSTALLDIR/libuuid-1.0.3/
+./configure --prefix=`pwd`/..
+make -j4
+make install
+cd $INSTALLDIR
